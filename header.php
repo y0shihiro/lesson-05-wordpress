@@ -20,7 +20,7 @@
   <div id="container">
 	<header id="header">
 	  <h1 id="site-id">
-		<a href="<?php echo home_url('/'); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/header/site_id.png" alt="<?php bloginfo( 'name' ); ?>" /></a>
+		<a href="<?php echo home_url( '/' ); ?>"><img src="<?php bloginfo( 'template_url' ); ?>/images/header/site_id.png" alt="<?php bloginfo( 'name' ); ?>" /></a>
 	  </h1><!-- #site-id end -->
 	  <div id="utility-group">
 		<nav id="utility-nav">
@@ -57,6 +57,6 @@
 	  </ul><!-- #menu-global end -->
 	</nav><!-- #global-nav end -->
 	<section id="branding">
-	  <img src="<?php bloginfo( 'template_url' ); ?>/images/top/main_image.png" width="950" height="295" alt="" />
+	  <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
 	</section><!-- #branding end -->
 	<section id="contents-body">
