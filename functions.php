@@ -10,3 +10,11 @@ add_theme_support(
 		'default-image' => '%s/images/top/main_image.png',
 	)
 );
+
+// カスタムメニュー
+register_nav_menus(
+	array(
+		'place_global'  => 'グローバル',
+		'place_utility' => 'ユーティリティ',
+	)
+);
