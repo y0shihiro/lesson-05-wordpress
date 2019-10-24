@@ -6,5 +6,21 @@
 	</header>
 	<section class="entry-content">
 		<?php the_content(); ?>
+		<?php
+		if ( is_single() ) :
+			?>
+			<div id="content_date_author">
+				<ul class="alignright">
+					<li>
+						<time pubdate="pubdate" datetime="<?php the_time( 'Y-m-d' ); ?>" class="entry-date"><?php the_time( get_option( 'date_format' ) ); ?></time>
+					</li>
+					<li>
+						<?php the_author_posts_link(); ?>
+				</li>
+				</ul>
+			</div>
+			<?php
+			endif;
+		?>
 	</section>
 </article>

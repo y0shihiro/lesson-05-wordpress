@@ -14,9 +14,20 @@ the_post_thumbnail(
 		<time pubdate="pubdate" datetime="<?php the_time( 'Y-m-d' ); ?>" class="entry-date">
 		<?php the_time( get_option( 'date_format' ) ); ?>
 		</time>
-		<h1 class="entry-title">
-			<a href="<?php the_permalink(); ?>">
-					<?php the_title(); ?>
+		<?php
+		if ( ! is_search() ) :
+			?>
+			<span class="author vcard">
+				<?php the_author_posts_link(); ?>
+			</span>
+			<?php
+			endif;
+		?>
+			<h1 class = 'entry-title' >
+			<a href   = '<?php the_permalink(); ?>' >
+					<?php
+					the_title();
+					?>
 		</a>
 		</h1>
 	</header>
