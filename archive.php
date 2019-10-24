@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 	<section id="contents">
 		<header class="page-header">
+		<?php the_category_image(); ?>
 			<h1 class="page-title">
 				<?php
 				if ( is_author() ) :

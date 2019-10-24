@@ -1,5 +1,6 @@
 <article>
 	<header class="page-header">
+		<?php the_category_image(); ?>
 		<h1 class="page-title">
 			<?php the_title(); ?>
 		</h1>
