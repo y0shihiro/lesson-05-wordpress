@@ -36,7 +36,7 @@
 							?>
 														</a>
 								<?php
-								the_excerpt();
+								the_short_excerpt();
 								?>
 							</li>
 								<?php

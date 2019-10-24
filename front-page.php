@@ -33,7 +33,7 @@
 												);
 												?>
 											</a>
-											<?php the_excerpt(); ?>
+											<?php the_pickup_excerpt(); ?>
 											<div class="continue-button">
 												<a href="<?php the_permalink(); ?>">詳しく見る</a>
 											</div>
@@ -83,7 +83,7 @@
 						);
 						?>
 		</a>
-						<?php the_excerpt(); ?>
+						<?php the_short_excerpt(); ?>
 			<span class="link-text"><a href="<?php the_permalink(); ?>">続きを読む</a></span>
 			</article>
 						<?php
