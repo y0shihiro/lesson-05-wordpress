@@ -6,6 +6,9 @@ if ( have_posts() ) :
 		the_post();
 		get_template_part( 'content' );
 	endwhile;
+	if ( in_category( 'column' ) ) :
+		comments_template( '', true );
+	endif;
 endif;
 ?>
 <?php get_template_part( 'back-to-top' ); ?>

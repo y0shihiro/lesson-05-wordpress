@@ -4,6 +4,11 @@
 		<h1 class="page-title">
 			<?php the_title(); ?>
 		</h1>
+		<?php
+		if ( is_single() && in_category( 'column' ) ) :
+			get_template_part( 'social-button' );
+		endif;
+		?>
 	</header>
 	<section class="entry-content">
 		<?php the_content(); ?>
@@ -27,6 +32,10 @@
 </article>
 <?php
 if ( is_single() ) :
+	if ( in_category( 'column' ) ) :
+		get_template_part( 'social-button' );
+		get_template_part( 'social-script' );
+	endif;
 	?>
 	<nav class="adjacent_post_links">
 		<ul>
@@ -39,5 +48,10 @@ if ( is_single() ) :
 		</ul>
 	</nav>
 	<?php
+	if ( in_category( 'column' ) ) :
+		?>
+	<div class="fb-comments" data-href="<?php the_permalink(); ?>" data-width="600" data-numposts="20"></div>
+		<?php
+	endif;
 	endif;
 ?>

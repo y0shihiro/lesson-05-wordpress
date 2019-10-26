@@ -2,14 +2,37 @@
 <html dir="ltr" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php bloginfo( 'name' ); ?></title>
+<title>
+	<?php
+	global $page, $paged;
+	if ( is_search() ) :
+		wp_title( '', true, 'left' );
+		echo ' | ';
+		else :
+			wp_title( '|', true, 'right' );
+		endif;
+		bloginfo( 'name' );
+		if ( is_front_page() ) :
+			echo ' | ';
+			bloginfo( 'description' );
+		endif;
+		if ( $paged >= 2 || $page >= 2 ) :
+			echo ' | ' . sprintf( '%sページ', max( $paged, $page ) );
+		endif;
+		?>
+</title>
 <link rel="apple-touch-icon" href="<?php bloginfo( 'template_url' ); ?>/images/touch-icon.png" />
 <link rel="shortcut icon" href="<?php bloginfo( 'template_url' ); ?>/images/favicon.ico" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <!--[if lt IE 9]>
 <meta http-equiv="Imagetoolbar" content="no" />
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+<?php
+if ( is_single() && in_category( 'column' ) ) :
+	get_template_part( 'header_ogp' );
+endif;
+?>
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

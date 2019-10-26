@@ -103,7 +103,7 @@ add_post_type_support( 'page', 'excerpt' );
 function the_short_excerpt() {
 	add_filter( 'excerpt_mblength', 'short_excerpt_length', 11 );
 	the_excerpt();
-	remove_filter( 'exceerpt_mblength', 'short_excerpt_length', 11 );
+	remove_filter( 'excerpt_mblength', 'short_excerpt_length', 11 );
 }
 
 function short_excerpt_length() {
@@ -153,3 +153,55 @@ function the_category_image() {
 	}
 	echo $image;
 }
+
+// コラムカテゴリーのみコメントできるようにする。
+function comments_allow_only_column( $open, $post_id ) {
+	if ( ! in_category( 'column', $post_id ) ) {
+		$open = false;
+	}
+	return $open;
+}
+add_filter( 'comments_open', 'comments_allow_only_column', 10, 2 );
+
+// OGPのための各種設定
+// アイキャッチ画像のURL取得
+function get_thumbnail_image_url() {
+	$img_id  = get_post_thumbnail_id();
+	$img_url = wp_get_attachment_image_src( $img_id, 'large', true );
+	return $img_url[0];
+}
+
+// OGP用description取得
+function get_ogp_excerpted_content( $content ) {
+	$content = strip_tags( $content );
+	$content = mb_substr( $content, 0, 120, 'UTF-8' );
+	$content = preg_replace( '/\s\s+/', '', $content );
+	$content = preg_replace( '/[\r\n]/', '', $content );
+	$content = esc_attr( $content ) . ' ...';
+	return $content;
+}
+
+// モール開発実績各ページのshortcode
+function posts_shortcode( $args ) {
+	$template = dirname( __FILE__ ) . '/posts.php';
+	if ( ! file_exists( $template ) ) {
+		return;
+	}
+	$def   = array(
+		'post_type'      => 'shops',
+		'taxonomy'       => 'mall',
+		'term'           => '',
+		'orderby'        => 'asc',
+		'posts_per_page' => -1,
+	);
+	$args  = shortcode_atts( $def, $args );
+	$posts = get_posts( $args );
+	ob_start();
+	foreach ( $posts as $post ) {
+		$post_custom = get_post_custom( $post->ID );
+		include $template;
+	}
+	$output = ob_get_clean();
+	return $output;
+}
+add_shortcode( 'posts', 'posts_shortcode' );
